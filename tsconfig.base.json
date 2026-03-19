@@ -1,0 +1,39 @@
+{
+    "compileOnSave":  false,
+    "compilerOptions":  {
+                            "rootDir":  ".",
+                            "sourceMap":  true,
+                            "declaration":  false,
+                            "moduleResolution":  "bundler",
+                            "emitDecoratorMetadata":  false,
+                            "experimentalDecorators":  true,
+                            "importHelpers":  true,
+                            "target":  "es2022",
+                            "module":  "preserve",
+                            "lib":  [
+                                        "es2020",
+                                        "dom"
+                                    ],
+                            "skipLibCheck":  true,
+                            "skipDefaultLibCheck":  true,
+                            "baseUrl":  ".",
+                            "paths":  {
+                                          "@sinaliza/feature-home":  [
+                                                                         "libs/feature/home/src/index.ts"
+                                                                     ],
+                                          "@sinaliza/feature-alunos":  [
+                                                                           "libs/feature/alunos/src/index.ts"
+                                                                       ],
+                                          "@sinaliza/ui-components":  [
+                                                                          "libs/ui/components/src/index.ts"
+                                                                      ],
+                                          "@sinaliza/data-access-alunos":  [
+                                                                               "libs/data-access/alunos/src/index.ts"
+                                                                           ]
+                                      }
+                        },
+    "exclude":  [
+                    "node_modules",
+                    "tmp"
+                ]
+}

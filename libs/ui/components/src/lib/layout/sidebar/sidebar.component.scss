@@ -1,0 +1,23 @@
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem;
+
+  a {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    &.active {
+      background-color: rgba(0, 0, 0, 0.08);
+      font-weight: 500;
+    }
+  }
+}
