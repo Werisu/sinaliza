@@ -1,0 +1,46 @@
+/**
+ * LibrasFlow — paleta alinhada ao logotipo:
+ * marinho (“Libras”), teal (“Flow”), azuis do gesto, lima (movimento), fundo claro #f5f5f5.
+ */
+
+html {
+  /* Marca (independente do tema) */
+  --lf-navy: #1a2d4a;
+  --lf-teal: #00a896;
+  --lf-teal-rgb: 0, 168, 150;
+  --lf-teal-dark: #078a7d;
+  /* Amostras do PNG oficial (mão + traços) */
+  --lf-blue-sky: #33ccff;
+  --lf-blue-royal: #0055bb;
+  --lf-lime: #99cc33;
+  --lf-lime-rgb: 153, 204, 51;
+  --lf-lime-dark: #669933;
+}
+
+html[data-bs-theme='light'],
+html:not([data-bs-theme]) {
+  --lf-layout-bg: #f5f5f5;
+  --lf-surface: #ffffff;
+  --lf-border: #e8e8ec;
+  --lf-text: var(--lf-navy);
+  --lf-text-muted: #5a6b7d;
+
+  --bs-primary: var(--lf-teal);
+  --bs-primary-rgb: var(--lf-teal-rgb);
+  --bs-link-color: var(--lf-blue-royal);
+  --bs-link-hover-color: var(--lf-teal-dark);
+}
+
+html[data-bs-theme='dark'] {
+  --lf-layout-bg: #0b1320;
+  --lf-surface: #141f2e;
+  --lf-border: #2a3f55;
+  --lf-text: #e8edf3;
+  --lf-text-muted: #94a8bc;
+
+  /* Teal e lima com bom contraste no escuro */
+  --bs-primary: #2dd4bf;
+  --bs-primary-rgb: 45, 212, 191;
+  --bs-link-color: #7dd3fc;
+  --bs-link-hover-color: #2dd4bf;
+}

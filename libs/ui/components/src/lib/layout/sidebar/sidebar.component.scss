@@ -8,23 +8,23 @@
   align-items: center;
   gap: 0.75rem;
   padding: 1.25rem 1rem 1rem;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--lf-border, #e8e8ec);
 }
 
-.sidebar-brand__mark {
+.sidebar-brand__logo {
   width: 2.5rem;
   height: 2.5rem;
-  border-radius: 0.65rem;
-  background: linear-gradient(135deg, #3c50e0, #6576ff);
   flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(60, 80, 224, 0.35);
+  object-fit: contain;
+  object-position: center;
+  border-radius: 0.5rem;
 }
 
 .sidebar-brand__title {
   display: block;
   font-weight: 700;
   font-size: 1.05rem;
-  color: #0f172a;
+  color: var(--lf-navy, #1a2d4a);
   letter-spacing: -0.02em;
   line-height: 1.2;
 }
@@ -32,8 +32,8 @@
 .sidebar-brand__sub {
   display: block;
   font-size: 0.75rem;
-  color: #64748b;
-  font-weight: 500;
+  color: var(--lf-teal, #00a896);
+  font-weight: 600;
 }
 
 .sidebar-nav {
@@ -49,7 +49,7 @@
   gap: 0.65rem;
   padding: 0.6rem 0.85rem;
   text-decoration: none;
-  color: #64748b;
+  color: var(--lf-text-muted, #5a6b7d);
   border-radius: 0.5rem;
   font-size: 0.9rem;
   font-weight: 500;
@@ -58,13 +58,13 @@
     color 0.15s ease;
 
   &:hover {
-    background-color: #f1f5f9;
-    color: #0f172a;
+    background-color: color-mix(in srgb, var(--lf-teal, #00a896) 8%, var(--lf-layout-bg, #f5f5f5));
+    color: var(--lf-navy, #1a2d4a);
   }
 
   &.active {
-    background-color: rgba(60, 80, 224, 0.1);
-    color: #3c50e0;
+    background-color: rgba(var(--lf-teal-rgb), 0.12);
+    color: var(--lf-teal-dark, #078a7d);
     font-weight: 600;
   }
 }
@@ -80,28 +80,29 @@
 
 :host-context(html[data-bs-theme='dark']) {
   .sidebar-brand {
-    border-bottom-color: #334155;
+    border-bottom-color: var(--lf-border);
   }
 
   .sidebar-brand__title {
-    color: #f1f5f9;
+    color: var(--lf-text);
   }
 
   .sidebar-brand__sub {
-    color: #94a3b8;
+    color: var(--lf-teal);
   }
 
   .sidebar-nav__link {
-    color: #94a3b8;
+    color: var(--lf-text-muted);
 
     &:hover {
-      background-color: #334155;
-      color: #f1f5f9;
+      background-color: color-mix(in srgb, var(--lf-teal) 12%, var(--lf-surface));
+      color: var(--lf-text);
     }
 
     &.active {
-      background-color: rgba(99, 102, 241, 0.2);
-      color: #a5b4fc;
+      background-color: rgba(var(--bs-primary-rgb), 0.16);
+      color: var(--lf-teal);
+      font-weight: 600;
     }
   }
 }

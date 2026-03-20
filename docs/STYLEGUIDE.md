@@ -2,7 +2,7 @@
 
 Guia de design e implementação visual do monorepo. Objetivo: manter **consistência** entre apps (`librasflow`, `sinaliza`), **libs** de feature e **componentes de UI**, e reduzir decisões ad hoc.
 
-**Referência visual do painel:** inspiração no padrão de admin dashboards como [TailAdmin Angular](https://angular-demo.tailadmin.com/) — cartões claros, fundo cinza, primário índigo, tipografia legível.
+**Referência visual do painel:** estrutura tipo admin (ex.: [TailAdmin Angular](https://angular-demo.tailadmin.com/)), com **cores da marca LibrasFlow** (logotipo): marinho, teal, azuis do ícone e lima — ver tokens em [`librasflow/src/_lf-brand.scss`](../librasflow/src/_lf-brand.scss).
 
 ---
 
@@ -69,25 +69,33 @@ O builder do Angular só lê **`.postcssrc.json`** ou **`postcss.config.json`** 
 
 ## 2. Cores
 
-### 2.1 Primário (painel / marca UI)
+**Fonte de verdade (CSS):** variáveis em `html` definidas em [`librasflow/src/_lf-brand.scss`](../librasflow/src/_lf-brand.scss) (`--lf-*`), importadas por [`styles.scss`](../librasflow/src/styles.scss). Modo claro/escuro ajusta `--lf-layout-bg`, `--lf-surface`, `--bs-primary`, etc.
 
-| Token / uso | Hex | Notas |
-|-------------|-----|--------|
-| Primário | `#3c50e0` | Botões primários, links fortes, ícones de destaque |
-| Primário claro (gradiente) | `#6576ff` | Gradientes com o primário |
-| Hover link | `#2a3cb8` | `--bs-link-hover-color` no escopo `.dash` |
+### 2.1 Marca LibrasFlow (logotipo → UI)
 
-RGB para variáveis Bootstrap: `60, 80, 224`.
+**Arquivo do logo (PNG transparente):** [`librasflow/public/brand/librasflow-logo.png`](../librasflow/public/brand/librasflow-logo.png) — servido em `/brand/librasflow-logo.png` (sidebar).
 
-### 2.2 Neutros (texto e superfície — estilo slate)
+| Token CSS | Hex | Uso |
+|-----------|-----|-----|
+| `--lf-navy` | `#1a2d4a` | Texto forte / “Libras” — títulos, hierarquia |
+| `--lf-teal` | `#00a896` | “Flow”, primário Bootstrap (claro), CTAs |
+| `--lf-teal-dark` | `#078a7d` | Hover / ênfase em teal |
+| `--lf-blue-sky` | `#33ccff` | Destaques / gradientes (azul claro do gesto no PNG) |
+| `--lf-blue-royal` | `#0055bb` | Links, gradientes (azul profundo do gesto) |
+| `--lf-lime` | `#99cc33` | Traços verdes / destaque “movimento” |
+| `--lf-lime-dark` | `#669933` | Variação mais escura do verde do logo |
 
-| Uso | Hex |
-|-----|-----|
-| Texto principal | `#1e293b` / `#0f172a` |
-| Texto secundário | `#64748b` |
-| Bordas | `#e2e8f0` |
-| Fundo app (conteúdo) | `#f1f5f9` |
-| Superfície cartão / header | `#ffffff` |
+No **modo escuro**, `--bs-primary` passa a um teal mais claro (`#2dd4bf`) para contraste; links usam azul ciano legível.
+
+### 2.2 Neutros (layout — derivados dos tokens)
+
+| Token / uso | Claro | Escuro |
+|-------------|-------|--------|
+| Fundo layout | `--lf-layout-bg` → `#f5f5f5` | `#0b1320` |
+| Superfície | `--lf-surface` → `#ffffff` | `#141f2e` |
+| Borda | `--lf-border` | `#e8e8ec` / `#2a3f55` |
+| Texto | `--lf-text` (marinho no claro) | `#e8edf3` |
+| Texto secundário | `--lf-text-muted` | `#94a8bc` |
 
 ### 2.3 Semânticos (KPIs, estados)
 
@@ -96,11 +104,11 @@ RGB para variáveis Bootstrap: `60, 80, 224`.
 | Sucesso / positivo | `#22c55e` ou classes Bootstrap `text-success` |
 | Aviso | `#f59e0b` / `text-warning` |
 | Erro / negativo | `#ef4444` / `text-danger` |
-| Informação | primário ou `text-primary` |
+| Informação | `text-primary` (teal marca) |
 
 ### 2.4 Gradientes de ícone (dashboard)
 
-Usados nos cartões KPI (`feature-home`): índigo, cyan, âmbar, rose — ver [feature-home.css](../libs/feature/home/src/lib/feature-home/feature-home.css) (classes `.dash__kpi-icon--*`).
+Em [feature-home.css](../libs/feature/home/src/lib/feature-home/feature-home.css) (`.dash__kpi-icon--*`): azul céu → royal (referência ao gesto), teal, misto lima/âmbar, rose para alertas.
 
 ---
 
