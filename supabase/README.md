@@ -28,4 +28,15 @@ supabaseUrl: 'https://SEU-PROJETO.supabase.co',
 supabaseAnonKey: 'sua-chave-anon',
 ```
 
-Para build de produção, use `environment.prod.ts` ou injeção via pipeline.
+### Produção (Vercel)
+
+No projeto Vercel: **Settings → Environment Variables** (ambiente **Production**), defina:
+
+| Nome | Valor |
+|------|--------|
+| `SUPABASE_URL` | URL do projeto (Settings → API → Project URL) |
+| `SUPABASE_ANON_KEY` | chave **anon public** |
+
+O `buildCommand` já roda `node librasflow/scripts/sync-env-prod.mjs` antes do build; sem essas variáveis o deploy no Vercel falha com mensagem explícita.
+
+Build local com produção: `SUPABASE_URL=... SUPABASE_ANON_KEY=... node librasflow/scripts/sync-env-prod.mjs && npx nx run librasflow:build:production` (no PowerShell use `$env:SUPABASE_URL="..."`).

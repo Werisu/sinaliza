@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run build",
+  "buildCommand": "node librasflow/scripts/sync-env-prod.mjs && npm run build",
   "outputDirectory": "dist/librasflow/browser",
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
