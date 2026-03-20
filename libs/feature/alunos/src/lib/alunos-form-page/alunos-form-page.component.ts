@@ -1,4 +1,10 @@
-import { Component, NgZone, inject } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  NgZone,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { finalize, first } from 'rxjs/operators';
@@ -18,7 +24,7 @@ import { AlunosFormComponent } from '../alunos-form/alunos-form.component';
   templateUrl: './alunos-form-page.component.html',
   styleUrl: './alunos-form-page.component.css',
 })
-export class AlunosFormPageComponent {
+export class AlunosFormPageComponent implements OnInit {
   form!: FormGroup;
   isEdit = false;
   loading = false;
@@ -32,6 +38,7 @@ export class AlunosFormPageComponent {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
   private readonly ngZone = inject(NgZone);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   ngOnInit(): void {
     this.form = this.criarForm();
@@ -64,6 +71,7 @@ export class AlunosFormPageComponent {
         finalize(() => {
           this.ngZone.run(() => {
             this.loading = false;
+            this.cdr.detectChanges();
           });
         })
       )
@@ -75,6 +83,7 @@ export class AlunosFormPageComponent {
             } else {
               this.loadError = 'Aluno não encontrado.';
             }
+            this.cdr.detectChanges();
           });
         },
         error: (err: unknown) => {
@@ -83,6 +92,7 @@ export class AlunosFormPageComponent {
               err,
               'Não foi possível carregar o aluno.'
             );
+            this.cdr.detectChanges();
           });
         },
       });

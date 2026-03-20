@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { PostgrestError } from '@supabase/supabase-js';
-import { from, Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { AlunosDataAccessError, mapPostgrestError } from '../errors/alunos-data-access.error';
 import {
   alunoRowToDomain,
@@ -63,29 +63,82 @@ export class AlunosRepository {
   }
 
   obterPorId(id: string): Observable<Aluno | undefined> {
-    return from(
-      this.supabase.from(TABLE).select('*').eq('id', id).maybeSingle()
-    ).pipe(
-      map(({ data, error }) => {
-        if (error) throw mapPostgrestError(error);
-        if (!data) return undefined;
-        return alunoRowToDomain(data as AlunoRow);
-      }),
-      catchError((err) => this.wrapUnexpected(err))
-    );
+    return new Observable<Aluno | undefined>((subscriber) => {
+      let cancelled = false;
+
+      void (async () => {
+        try {
+          // `await` no builder do Supabase é mais fiável que `Promise.resolve(query)` + `.then()`
+          // com `maybeSingle()` em alguns bundlers (evita fluxo que nunca completa).
+          const { data, error } = await this.supabase
+            .from(TABLE)
+            .select('*')
+            .eq('id', id)
+            .maybeSingle();
+
+          if (cancelled || subscriber.closed) return;
+
+          if (error) {
+            subscriber.error(mapPostgrestError(error));
+            return;
+          }
+          if (!data) {
+            subscriber.next(undefined);
+            subscriber.complete();
+            return;
+          }
+          subscriber.next(alunoRowToDomain(data as AlunoRow));
+          subscriber.complete();
+        } catch (err: unknown) {
+          if (!cancelled && !subscriber.closed) {
+            subscriber.error(err);
+          }
+        }
+      })();
+
+      return () => {
+        cancelled = true;
+      };
+    }).pipe(catchError((err) => this.wrapUnexpected(err)));
   }
 
   criar(aluno: Omit<Aluno, 'id'>): Observable<Aluno> {
     const payload = alunoToInsertPayload(aluno);
-    return from(
-      this.supabase.from(TABLE).insert(payload).select('*').single()
-    ).pipe(
-      map(({ data, error }) => {
-        if (error) throw mapPostgrestError(error);
-        return alunoRowToDomain(data as AlunoRow);
-      }),
-      catchError((err) => this.wrapUnexpected(err))
-    );
+    return new Observable<Aluno>((subscriber) => {
+      const query = this.supabase.from(TABLE).insert(payload).select('*').single();
+
+      void Promise.resolve(query)
+        .then((result) => {
+          if (subscriber.closed) return;
+          const { data, error } = result as {
+            data: AlunoRow | null;
+            error: PostgrestError | null;
+          };
+          if (error) {
+            subscriber.error(mapPostgrestError(error));
+            return;
+          }
+          if (!data) {
+            subscriber.error(
+              new AlunosDataAccessError('Resposta vazia ao criar aluno.')
+            );
+            return;
+          }
+          try {
+            subscriber.next(alunoRowToDomain(data as AlunoRow));
+            subscriber.complete();
+          } catch (e) {
+            subscriber.error(e);
+          }
+        })
+        .catch((err: unknown) => {
+          if (!subscriber.closed) {
+            subscriber.error(err);
+          }
+        });
+
+      return () => {};
+    }).pipe(catchError((err) => this.wrapUnexpected(err)));
   }
 
   atualizar(
@@ -96,27 +149,78 @@ export class AlunosRepository {
     if (Object.keys(payload).length === 0) {
       return this.obterPorId(id);
     }
-    return from(
-      this.supabase.from(TABLE).update(payload).eq('id', id).select('*').maybeSingle()
-    ).pipe(
-      map(({ data, error }) => {
-        if (error) throw mapPostgrestError(error);
-        if (!data) return undefined;
-        return alunoRowToDomain(data as AlunoRow);
-      }),
-      catchError((err) => this.wrapUnexpected(err))
-    );
+    return new Observable<Aluno | undefined>((subscriber) => {
+      const query = this.supabase
+        .from(TABLE)
+        .update(payload)
+        .eq('id', id)
+        .select('*')
+        .maybeSingle();
+
+      void Promise.resolve(query)
+        .then((result) => {
+          if (subscriber.closed) return;
+          const { data, error } = result as {
+            data: AlunoRow | null;
+            error: PostgrestError | null;
+          };
+          if (error) {
+            subscriber.error(mapPostgrestError(error));
+            return;
+          }
+          if (!data) {
+            subscriber.next(undefined);
+            subscriber.complete();
+            return;
+          }
+          try {
+            subscriber.next(alunoRowToDomain(data as AlunoRow));
+            subscriber.complete();
+          } catch (e) {
+            subscriber.error(e);
+          }
+        })
+        .catch((err: unknown) => {
+          if (!subscriber.closed) {
+            subscriber.error(err);
+          }
+        });
+
+      return () => {};
+    }).pipe(catchError((err) => this.wrapUnexpected(err)));
   }
 
   excluir(id: string): Observable<boolean> {
-    return from(this.supabase.from(TABLE).delete().eq('id', id).select('id')).pipe(
-      map(({ data, error }) => {
-        if (error) throw mapPostgrestError(error);
-        const rows = data ?? [];
-        return Array.isArray(rows) && rows.length > 0;
-      }),
-      catchError((err) => this.wrapUnexpected(err))
-    );
+    return new Observable<boolean>((subscriber) => {
+      const query = this.supabase.from(TABLE).delete().eq('id', id).select('id');
+
+      void Promise.resolve(query)
+        .then((result) => {
+          if (subscriber.closed) return;
+          const { data, error } = result as {
+            data: unknown;
+            error: PostgrestError | null;
+          };
+          if (error) {
+            subscriber.error(mapPostgrestError(error));
+            return;
+          }
+          const rows = data ?? [];
+          try {
+            subscriber.next(Array.isArray(rows) && rows.length > 0);
+            subscriber.complete();
+          } catch (e) {
+            subscriber.error(e);
+          }
+        })
+        .catch((err: unknown) => {
+          if (!subscriber.closed) {
+            subscriber.error(err);
+          }
+        });
+
+      return () => {};
+    }).pipe(catchError((err) => this.wrapUnexpected(err)));
   }
 
   private wrapUnexpected(err: unknown): Observable<never> {
