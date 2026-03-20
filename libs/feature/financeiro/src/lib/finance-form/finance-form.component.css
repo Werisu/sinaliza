@@ -1,0 +1,33 @@
+.finance-form__field {
+  margin-bottom: 1rem;
+}
+
+.finance-form__field label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+.finance-form__field select {
+  width: 100%;
+  max-width: 24rem;
+  padding: 0.35rem 0.5rem;
+}
+
+.finance-form__fixo {
+  margin: 0 0 0.75rem;
+}
+
+.finance-form__err {
+  display: block;
+  color: #b00020;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.finance-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}

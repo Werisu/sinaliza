@@ -1,0 +1,52 @@
+@if (isEdit) {
+  <h2 class="finance-form-page__title">Editar mensalidade</h2>
+  @let ev = editVm$ | async;
+  @if (!ev) {
+    <p class="page-loading">Carregando…</p>
+  } @else if (ev.error) {
+    <p class="page-error" role="alert">{{ ev.error }}</p>
+    <button type="button" (click)="carregarEdicao()">Tentar novamente</button>
+  } @else if (ev.loading) {
+    <p class="page-loading">Carregando…</p>
+  } @else if (ev && !ev.error) {
+    @if (saveError) {
+      <p class="page-error" role="alert">{{ saveError }}</p>
+    }
+    <librasflow-finance-form
+      [form]="form"
+      [isEdit]="true"
+      [alunoNomeFixo]="alunoNomeFixo"
+      [competenciaFixaLabel]="competenciaFixaLabel"
+      [disabled]="saving"
+      (save)="onSave()"
+      (cancel)="onCancel()"
+    />
+  }
+} @else {
+  <h2 class="finance-form-page__title">Nova mensalidade</h2>
+  @let av = alunosVm$ | async;
+  @if (!av) {
+    <p class="page-loading">Carregando…</p>
+  } @else if (av.error) {
+    <p class="page-error" role="alert">{{ av.error }}</p>
+    <button type="button" (click)="carregarAlunos()">Tentar novamente</button>
+  } @else if (av.loading) {
+    <p class="page-loading">Carregando alunos…</p>
+  } @else if (av && av.alunos.length === 0) {
+    <p class="page-hint">Cadastre alunos antes de lançar mensalidades.</p>
+    <a routerLink="/alunos">Ir para alunos</a>
+  } @else if (av) {
+    @if (saveError) {
+      <p class="page-error" role="alert">{{ saveError }}</p>
+    }
+    <librasflow-finance-form
+      [form]="form"
+      [alunos]="av.alunos"
+      [isEdit]="false"
+      [disabled]="saving"
+      (save)="onSave()"
+      (cancel)="onCancel()"
+      (alunoChange)="aplicarValorPadraoAluno($event, av.alunos)"
+    />
+  }
+}

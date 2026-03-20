@@ -1,0 +1,30 @@
+<div class="finance-toolbar">
+  <label class="finance-toolbar__label" for="mes-comp">Mês de competência</label>
+  <input
+    id="mes-comp"
+    type="month"
+    [value]="mesSelecionado"
+    (change)="onMesChange($event)"
+  />
+</div>
+
+@let vm = vm$ | async;
+
+@if (vm; as s) {
+  @if (s.error) {
+    <p class="page-error" role="alert">{{ s.error }}</p>
+    <button type="button" (click)="carregar()">Tentar novamente</button>
+  } @else if (s.loading) {
+    <p class="page-loading">Carregando…</p>
+  } @else {
+    <librasflow-finance-list
+      [itens]="s.itens"
+      (novoClicked)="onNovo()"
+      (editarClicked)="onEditar($event)"
+      (alternarPagoClicked)="onAlternarPago($event)"
+      (cobrarWhatsAppClicked)="onCobrarWhatsApp($event)"
+    />
+  }
+} @else {
+  <p class="page-loading">Carregando…</p>
+}

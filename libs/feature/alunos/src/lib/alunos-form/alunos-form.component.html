@@ -7,6 +7,10 @@
     <input type="tel" formControlName="telefone" />
   </librasflow-form-field>
 
+  <librasflow-form-field label="Valor mensal (R$, opcional)" [control]="form.get('valorMensal')">
+    <input type="number" formControlName="valorMensal" min="0" step="0.01" />
+  </librasflow-form-field>
+
   <librasflow-form-field label="Tipo de aula" [control]="form.get('tipoAula')">
     <select formControlName="tipoAula">
       <option value="">Selecione</option>

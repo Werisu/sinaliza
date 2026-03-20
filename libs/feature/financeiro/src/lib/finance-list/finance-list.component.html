@@ -1,0 +1,42 @@
+<div class="finance-list">
+  <div class="finance-list__header">
+    <h2>Mensalidades</h2>
+    <librasflow-button (clicked)="novoClicked.emit()">Nova mensalidade</librasflow-button>
+  </div>
+
+  @if (itens.length === 0) {
+    <p class="finance-list__empty">Nenhuma mensalidade neste mês.</p>
+  } @else {
+    <ul class="finance-list__items">
+      @for (item of itens; track item.id) {
+        <li class="finance-list__item">
+          <div class="finance-list__main">
+            <span class="finance-list__nome">{{ item.alunoNome }}</span>
+            <span class="finance-list__meta">
+              {{ formatarMes(item.referenciaMes) }} · {{ formatarValor(item.valor) }} · venc.
+              {{ formatarData(item.dataVencimento) }}
+            </span>
+            <span
+              class="finance-list__status"
+              [class.finance-list__status--pago]="item.status === 'pago'"
+              [class.finance-list__status--pendente]="item.status === 'pendente'"
+            >
+              {{ item.status === 'pago' ? 'Pago' : 'Pendente' }}
+            </span>
+          </div>
+          <div class="finance-list__actions">
+            <librasflow-button variant="secondary" (clicked)="cobrarWhatsAppClicked.emit(item)">
+              WhatsApp
+            </librasflow-button>
+            <librasflow-button variant="secondary" (clicked)="alternarPagoClicked.emit(item)">
+              {{ item.status === 'pago' ? 'Marcar pendente' : 'Marcar pago' }}
+            </librasflow-button>
+            <librasflow-button variant="secondary" (clicked)="editarClicked.emit(item.id)">
+              Editar
+            </librasflow-button>
+          </div>
+        </li>
+      }
+    </ul>
+  }
+</div>

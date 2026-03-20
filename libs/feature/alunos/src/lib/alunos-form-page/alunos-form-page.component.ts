@@ -2,7 +2,13 @@ import { Component, NgZone, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { finalize, first } from 'rxjs/operators';
-import { AlunosDataAccessError, AlunosService } from '@sinaliza/data-access-alunos';
+import {
+  Aluno,
+  AlunosDataAccessError,
+  AlunosService,
+  Nivel,
+  TipoAula,
+} from '@sinaliza/data-access-alunos';
 import { AlunosFormComponent } from '../alunos-form/alunos-form.component';
 
 @Component({
@@ -41,6 +47,7 @@ export class AlunosFormPageComponent {
     return this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(2)]],
       telefone: ['', [Validators.required]],
+      valorMensal: [null as number | string | null],
       tipoAula: ['', Validators.required],
       nivel: ['', Validators.required],
       observacoes: [''],
@@ -88,7 +95,28 @@ export class AlunosFormPageComponent {
       return;
     }
 
-    const valor = this.form.getRawValue();
+    const raw = this.form.getRawValue() as {
+      nome: string;
+      telefone: string;
+      tipoAula: TipoAula;
+      nivel: Nivel;
+      observacoes: string;
+      valorMensal: number | string | null;
+    };
+    const valorMensalParseado = this.parseValorMensal(raw.valorMensal);
+    if (valorMensalParseado === false) {
+      this.saveError = 'Valor mensal inválido.';
+      return;
+    }
+    const valor: Omit<Aluno, 'id'> = {
+      nome: raw.nome,
+      telefone: raw.telefone,
+      tipoAula: raw.tipoAula,
+      nivel: raw.nivel,
+      observacoes: raw.observacoes ?? '',
+      valorMensal: valorMensalParseado,
+    };
+
     this.saving = true;
     this.saveError = null;
 
@@ -122,6 +150,14 @@ export class AlunosFormPageComponent {
 
   onCancel(): void {
     this.router.navigate(['/alunos']);
+  }
+
+  /** `null` ok; `false` = inválido */
+  private parseValorMensal(v: unknown): number | null | false {
+    if (v === '' || v === null || v === undefined) return null;
+    const n = typeof v === 'number' ? v : Number(v);
+    if (!Number.isFinite(n) || n < 0) return false;
+    return n;
   }
 
   private mensagemErro(err: unknown, fallback: string): string {

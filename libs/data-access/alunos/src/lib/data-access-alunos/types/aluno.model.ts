@@ -18,4 +18,6 @@ export interface Aluno {
   tipoAula: TipoAula;
   nivel: Nivel;
   observacoes: string;
+  /** Valor mensal de referência (opcional); usado como padrão ao lançar mensalidades. */
+  valorMensal: number | null;
 }

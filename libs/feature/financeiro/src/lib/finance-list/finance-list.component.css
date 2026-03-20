@@ -1,0 +1,65 @@
+.finance-list__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.finance-list__empty {
+  color: #555;
+}
+
+.finance-list__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.finance-list__item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.finance-list__main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1 1 12rem;
+}
+
+.finance-list__nome {
+  font-weight: 600;
+}
+
+.finance-list__meta {
+  font-size: 0.875rem;
+  color: #555;
+}
+
+.finance-list__status {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.finance-list__status--pago {
+  color: #1b5e20;
+}
+
+.finance-list__status--pendente {
+  color: #b45309;
+}
+
+.finance-list__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}

@@ -11,4 +11,5 @@ export interface AlunoRow {
   tipo_aula: TipoAula;
   nivel: Nivel;
   observacoes: string | null;
+  valor_mensal: number | string | null;
 }

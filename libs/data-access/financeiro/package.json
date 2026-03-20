@@ -1,0 +1,11 @@
+{
+  "name": "@sinaliza/data-access-financeiro",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^21.2.0",
+    "@angular/core": "^21.2.0",
+    "@supabase/supabase-js": "^2.0.0",
+    "@sinaliza/data-access-alunos": "0.0.1"
+  },
+  "sideEffects": false
+}

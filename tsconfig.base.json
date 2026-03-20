@@ -20,7 +20,11 @@
       "@sinaliza/ui-components": ["libs/ui/components/src/index.ts"],
       "@sinaliza/data-access-alunos": ["libs/data-access/alunos/src/index.ts"],
       "@sinaliza/data-access-agenda": ["libs/data-access/agenda/src/index.ts"],
-      "@sinaliza/feature-agenda": ["libs/feature/agenda/src/index.ts"]
+      "@sinaliza/feature-agenda": ["libs/feature/agenda/src/index.ts"],
+      "@sinaliza/data-access-financeiro": [
+        "libs/data-access/financeiro/src/index.ts"
+      ],
+      "@sinaliza/feature-financeiro": ["libs/feature/financeiro/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

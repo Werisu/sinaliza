@@ -1,0 +1,55 @@
+<form [formGroup]="form" (ngSubmit)="save.emit()">
+  @if (isEdit) {
+    <p class="finance-form__fixo"><strong>Aluno:</strong> {{ alunoNomeFixo }}</p>
+    <p class="finance-form__fixo"><strong>Competência:</strong> {{ competenciaFixaLabel }}</p>
+  } @else {
+    <div class="finance-form__field">
+      <label for="alunoId">Aluno</label>
+      <select
+        id="alunoId"
+        formControlName="alunoId"
+        [disabled]="disabled"
+        (change)="onAlunoSelectChange()"
+      >
+        <option value="">Selecione…</option>
+        @for (a of alunos; track a.id) {
+          <option [value]="a.id">{{ a.nome }}</option>
+        }
+      </select>
+      @if (form.get('alunoId')?.invalid && form.get('alunoId')?.touched) {
+        <span class="finance-form__err">Selecione um aluno.</span>
+      }
+    </div>
+
+    <librasflow-form-field label="Mês de competência" [control]="form.get('competenciaMes')">
+      <input type="month" formControlName="competenciaMes" [disabled]="disabled" />
+    </librasflow-form-field>
+  }
+
+  <librasflow-form-field label="Valor (R$)" [control]="form.get('valor')">
+    <input type="number" formControlName="valor" min="0" step="0.01" [disabled]="disabled" />
+  </librasflow-form-field>
+
+  <librasflow-form-field label="Vencimento" [control]="form.get('dataVencimento')">
+    <input type="date" formControlName="dataVencimento" [disabled]="disabled" />
+  </librasflow-form-field>
+
+  <librasflow-form-field label="Status" [control]="form.get('status')">
+    <select formControlName="status" [disabled]="disabled">
+      @for (s of statusOpcoes; track s) {
+        <option [value]="s">{{ s === 'pago' ? 'Pago' : 'Pendente' }}</option>
+      }
+    </select>
+  </librasflow-form-field>
+
+  <librasflow-form-field label="Observações" [control]="form.get('observacoes')">
+    <textarea formControlName="observacoes" rows="2" [disabled]="disabled"></textarea>
+  </librasflow-form-field>
+
+  <div class="finance-form__actions">
+    <librasflow-button type="submit" [disabled]="disabled">Salvar</librasflow-button>
+    <librasflow-button type="button" variant="secondary" [disabled]="disabled" (clicked)="cancel.emit()">
+      Cancelar
+    </librasflow-button>
+  </div>
+</form>

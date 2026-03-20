@@ -1,0 +1,19 @@
+.finance-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.finance-toolbar__label {
+  font-weight: 500;
+}
+
+.page-error {
+  color: #b00020;
+}
+
+.page-loading {
+  color: #555;
+}

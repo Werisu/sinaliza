@@ -13,6 +13,7 @@ No **SQL Editor**, execute os scripts **nesta ordem**:
 
 1. `migrations/001_create_alunos.sql` — alunos
 2. `migrations/002_create_aula_agendamentos.sql` — horários fixos semanais (agenda)
+3. `migrations/003_financeiro_mensalidades.sql` — valor mensal no aluno + mensalidades
 
 Isso cria as tabelas, constraints e políticas RLS para o role `anon` (adequado para desenvolvimento).
 
