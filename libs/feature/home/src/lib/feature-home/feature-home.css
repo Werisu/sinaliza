@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:host {
+  display: block;
+}
+
+/* Tokens próximos ao TailAdmin: neutros frios + primário índigo */
+.dash {
+  --dash-primary: #3c50e0;
+  --dash-primary-rgb: 60, 80, 224;
+  --dash-surface: #ffffff;
+  --dash-muted: #64748b;
+  --dash-border: #e2e8f0;
+
+  --bs-primary: var(--dash-primary);
+  --bs-primary-rgb: var(--dash-primary-rgb);
+  --bs-link-color: var(--dash-primary);
+  --bs-link-hover-color: #2a3cb8;
+
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: #1e293b;
+}
+
+.dash__skip {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1080;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background: var(--dash-surface);
+  border: 1px solid var(--dash-border);
+  border-radius: 0.5rem;
+  color: #1e293b;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  transform: translateY(-200%);
+  transition: transform 0.2s ease;
+}
+
+.dash__skip:focus {
+  transform: translateY(0);
+  outline: 2px solid var(--dash-primary);
+  outline-offset: 2px;
+}
+
+.dash__main {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dash__crumb {
+  letter-spacing: 0.02em;
+}
+
+.dash__crumb-sep {
+  margin: 0 0.35rem;
+  opacity: 0.5;
+}
+
+.dash__crumb-item--current {
+  color: #64748b;
+}
+
+.dash__date-badge {
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.dash__kpi {
+  border: 1px solid var(--dash-border) !important;
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.dash__kpi:hover {
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08) !important;
+  border-color: #cbd5e1 !important;
+}
+
+.dash__kpi-label {
+  letter-spacing: 0.06em;
+  font-size: 0.7rem !important;
+}
+
+.dash__kpi-value {
+  letter-spacing: -0.02em;
+}
+
+.dash__kpi-icon {
+  color: #fff;
+}
+
+.dash__kpi-icon--indigo {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+}
+
+.dash__kpi-icon--cyan {
+  background: linear-gradient(135deg, #0891b2, #06b6d4);
+}
+
+.dash__kpi-icon--amber {
+  background: linear-gradient(135deg, #d97706, #f59e0b);
+}
+
+.dash__kpi-icon--rose {
+  background: linear-gradient(135deg, #e11d48, #f43f5e);
+}
+
+.dash__badge-soft {
+  background: rgba(60, 80, 224, 0.1) !important;
+  color: var(--dash-primary) !important;
+  border: 1px solid rgba(60, 80, 224, 0.15);
+}
+
+.dash__progress {
+  height: 0.65rem;
+  background-color: #e2e8f0;
+}
+
+.dash__progress-bar {
+  background: linear-gradient(90deg, #3c50e0, #6576ff);
+}
+
+.dash__quick-link:hover {
+  background: #f8fafc;
+}
+
+.dash__list .list-group-item {
+  background: transparent;
+}
+
+.dash__table thead th {
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  border-bottom-color: var(--dash-border);
+}
+
+.dash__table tbody td {
+  border-color: #f1f5f9;
+  vertical-align: middle;
+}
+
+.dash__table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.dash__dot-live {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.35);
+}
+
+.dash__timeline-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--dash-primary);
+  opacity: 0.85;
+}
+
+@media (prefers-color-scheme: dark) {
+  .dash {
+    color: #e2e8f0;
+    --dash-surface: #1e293b;
+    --dash-border: #334155;
+    --dash-muted: #94a3b8;
+    --bs-body-color: #e2e8f0;
+    --bs-secondary-color: #94a3b8;
+  }
+
+  .dash .text-dark {
+    color: #f1f5f9 !important;
+  }
+
+  .dash .text-secondary {
+    color: #94a3b8 !important;
+  }
+
+  .dash .bg-white {
+    background-color: #1e293b !important;
+  }
+
+  .dash .border {
+    border-color: #334155 !important;
+  }
+
+  .dash__kpi,
+  .dash .card {
+    background-color: #0f172a !important;
+    border-color: #334155 !important;
+  }
+
+  .dash__kpi:hover {
+    border-color: #475569 !important;
+  }
+
+  .dash .table-light {
+    --bs-table-bg: #1e293b;
+    color: #94a3b8;
+  }
+
+  .dash__table tbody td {
+    border-color: #334155;
+  }
+
+  .dash__quick-link:hover {
+    background: #1e293b;
+  }
+
+  .dash .btn-outline-secondary {
+    --bs-btn-color: #cbd5e1;
+    --bs-btn-border-color: #475569;
+  }
+}

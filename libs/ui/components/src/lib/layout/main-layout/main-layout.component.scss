@@ -1,12 +1,14 @@
 .layout {
   display: flex;
   min-height: 100vh;
+  background: #f1f5f9;
 }
 
 .sidebar {
-  width: 12rem;
-  border-right: 1px solid rgba(0, 0, 0, 0.08);
-  background-color: #fafafa;
+  width: 17rem;
+  flex-shrink: 0;
+  border-right: 1px solid #e2e8f0;
+  background-color: #ffffff;
 }
 
 .main {
@@ -18,5 +20,18 @@
 
 .content {
   flex: 1;
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 2rem;
+  background-color: #f1f5f9;
+}
+
+@media (max-width: 767.98px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e2e8f0;
+  }
 }
