@@ -1,0 +1,4 @@
+@import "tailwindcss" source("./app");
+
+/* Templates/componentes das libs usadas pelo app (alinhado ao guia Nx para monorepos) */
+@source "../../libs";

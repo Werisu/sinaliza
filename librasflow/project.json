@@ -20,7 +20,10 @@
             "input": "librasflow/public"
           }
         ],
-        "styles": ["librasflow/src/styles.scss"]
+        "styles": [
+          "librasflow/src/tailwind.css",
+          "librasflow/src/styles.scss"
+        ]
       },
       "configurations": {
         "production": {
