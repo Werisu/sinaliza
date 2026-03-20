@@ -28,3 +28,35 @@
   background: linear-gradient(135deg, #3c50e0, #6576ff);
   box-shadow: 0 2px 8px rgba(60, 80, 224, 0.35);
 }
+
+.header__theme-btn {
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+:host-context(html[data-bs-theme='dark']) {
+  .header {
+    background: #1e293b;
+    border-bottom-color: #334155;
+  }
+
+  .header__search {
+    background-color: #0f172a !important;
+    border-color: #334155 !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .header__pill {
+    background: #334155;
+    color: #cbd5e1 !important;
+  }
+
+  .header__theme-btn {
+    --bs-btn-color: #cbd5e1;
+    --bs-btn-border-color: #475569;
+    --bs-btn-hover-bg: #334155;
+    --bs-btn-hover-border-color: #64748b;
+  }
+}

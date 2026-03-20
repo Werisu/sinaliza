@@ -161,57 +161,55 @@
   opacity: 0.85;
 }
 
-@media (prefers-color-scheme: dark) {
-  .dash {
-    color: #e2e8f0;
-    --dash-surface: #1e293b;
-    --dash-border: #334155;
-    --dash-muted: #94a3b8;
-    --bs-body-color: #e2e8f0;
-    --bs-secondary-color: #94a3b8;
-  }
+:host-context(html[data-bs-theme='dark']) .dash {
+  color: #e2e8f0;
+  --dash-surface: #1e293b;
+  --dash-border: #334155;
+  --dash-muted: #94a3b8;
+  --bs-body-color: #e2e8f0;
+  --bs-secondary-color: #94a3b8;
+}
 
-  .dash .text-dark {
-    color: #f1f5f9 !important;
-  }
+:host-context(html[data-bs-theme='dark']) .dash .text-dark {
+  color: #f1f5f9 !important;
+}
 
-  .dash .text-secondary {
-    color: #94a3b8 !important;
-  }
+:host-context(html[data-bs-theme='dark']) .dash .text-secondary {
+  color: #94a3b8 !important;
+}
 
-  .dash .bg-white {
-    background-color: #1e293b !important;
-  }
+:host-context(html[data-bs-theme='dark']) .dash .bg-white {
+  background-color: #1e293b !important;
+}
 
-  .dash .border {
-    border-color: #334155 !important;
-  }
+:host-context(html[data-bs-theme='dark']) .dash .border {
+  border-color: #334155 !important;
+}
 
-  .dash__kpi,
-  .dash .card {
-    background-color: #0f172a !important;
-    border-color: #334155 !important;
-  }
+:host-context(html[data-bs-theme='dark']) .dash__kpi,
+:host-context(html[data-bs-theme='dark']) .dash .card {
+  background-color: #0f172a !important;
+  border-color: #334155 !important;
+}
 
-  .dash__kpi:hover {
-    border-color: #475569 !important;
-  }
+:host-context(html[data-bs-theme='dark']) .dash__kpi:hover {
+  border-color: #475569 !important;
+}
 
-  .dash .table-light {
-    --bs-table-bg: #1e293b;
-    color: #94a3b8;
-  }
+:host-context(html[data-bs-theme='dark']) .dash .table-light {
+  --bs-table-bg: #1e293b;
+  color: #94a3b8;
+}
 
-  .dash__table tbody td {
-    border-color: #334155;
-  }
+:host-context(html[data-bs-theme='dark']) .dash__table tbody td {
+  border-color: #334155;
+}
 
-  .dash__quick-link:hover {
-    background: #1e293b;
-  }
+:host-context(html[data-bs-theme='dark']) .dash__quick-link:hover {
+  background: #1e293b;
+}
 
-  .dash .btn-outline-secondary {
-    --bs-btn-color: #cbd5e1;
-    --bs-btn-border-color: #475569;
-  }
+:host-context(html[data-bs-theme='dark']) .dash .btn-outline-secondary {
+  --bs-btn-color: #cbd5e1;
+  --bs-btn-border-color: #475569;
 }

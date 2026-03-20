@@ -35,3 +35,26 @@
     border-bottom: 1px solid #e2e8f0;
   }
 }
+
+:host-context(html[data-bs-theme='dark']) {
+  .layout {
+    background: #0f172a;
+  }
+
+  .sidebar {
+    background-color: #1e293b;
+    border-color: #334155;
+  }
+
+  .content {
+    background-color: #0f172a;
+  }
+}
+
+@media (max-width: 767.98px) {
+  :host-context(html[data-bs-theme='dark']) {
+    .sidebar {
+      border-bottom-color: #334155;
+    }
+  }
+}

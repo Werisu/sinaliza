@@ -77,3 +77,31 @@
 .sidebar-nav__link.active .sidebar-nav__ico {
   opacity: 1;
 }
+
+:host-context(html[data-bs-theme='dark']) {
+  .sidebar-brand {
+    border-bottom-color: #334155;
+  }
+
+  .sidebar-brand__title {
+    color: #f1f5f9;
+  }
+
+  .sidebar-brand__sub {
+    color: #94a3b8;
+  }
+
+  .sidebar-nav__link {
+    color: #94a3b8;
+
+    &:hover {
+      background-color: #334155;
+      color: #f1f5f9;
+    }
+
+    &.active {
+      background-color: rgba(99, 102, 241, 0.2);
+      color: #a5b4fc;
+    }
+  }
+}

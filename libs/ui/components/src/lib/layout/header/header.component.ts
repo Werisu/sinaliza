@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ThemeService } from '../../theme/theme.service';
 
 @Component({
   selector: 'librasflow-header',
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  protected readonly theme = inject(ThemeService);
+}
