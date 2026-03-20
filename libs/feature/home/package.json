@@ -4,7 +4,10 @@
   "peerDependencies": {
     "@angular/common": "^21.2.0",
     "@angular/core": "^21.2.0",
-    "@angular/router": "^21.2.0"
+    "@angular/router": "^21.2.0",
+    "@sinaliza/data-access-agenda": "0.0.1",
+    "@sinaliza/data-access-alunos": "0.0.1",
+    "@sinaliza/data-access-financeiro": "0.0.1"
   },
   "sideEffects": false
 }
