@@ -1,0 +1,29 @@
+.page-error {
+  color: #b00020;
+}
+
+.page-loading {
+  color: #555;
+}
+
+.agenda-dias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.agenda-dias__btn {
+  padding: 0.35rem 0.65rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.agenda-dias__btn--active {
+  border-color: #333;
+  background: #f0f0f0;
+  font-weight: 600;
+}

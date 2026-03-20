@@ -1,0 +1,31 @@
+@let vm = vm$ | async;
+
+@if (vm; as s) {
+  @if (s.error) {
+    <p class="page-error" role="alert">{{ s.error }}</p>
+    <button type="button" (click)="carregar()">Tentar novamente</button>
+  } @else if (!s.loading) {
+  <div class="agenda-dias">
+    @for (d of diasSemana; track d.valor) {
+      <button
+        type="button"
+        class="agenda-dias__btn"
+        [class.agenda-dias__btn--active]="selectedDia() === d.valor"
+        (click)="selecionarDia(d.valor)"
+      >
+        {{ d.rotulo }}
+      </button>
+    }
+  </div>
+    <librasflow-agenda-list
+      [tituloDia]="tituloDiaSelecionado()"
+      [itens]="itensDoDia(s.itens)"
+      (novoClicked)="onNovo()"
+      (excluirClicked)="onExcluir($event)"
+    />
+  } @else {
+    <p class="page-loading">Carregando…</p>
+  }
+} @else {
+  <p class="page-loading">Carregando…</p>
+}

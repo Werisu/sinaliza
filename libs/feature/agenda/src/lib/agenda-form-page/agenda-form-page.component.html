@@ -1,0 +1,29 @@
+<h2 class="agenda-form-page__title">Novo horário fixo</h2>
+
+@if (alunosVm$ | async; as vm) {
+  @if (vm.error) {
+    <p class="page-error" role="alert">{{ vm.error }}</p>
+    <button type="button" (click)="carregarAlunos()">Tentar novamente</button>
+  } @else if (vm.loading) {
+    <p class="page-loading">Carregando alunos…</p>
+  } @else if (vm.alunos.length === 0) {
+    <p class="page-hint">Cadastre pelo menos um aluno antes de definir horários.</p>
+    <a routerLink="/alunos">Ir para alunos</a>
+  } @else {
+    @if (saveError) {
+      <p class="page-error" role="alert">{{ saveError }}</p>
+    }
+    <librasflow-agenda-form
+      [form]="form"
+      [alunos]="vm.alunos"
+      [diasMarcados]="diasMarcados"
+      [diasErro]="diasErro"
+      [disabled]="saving"
+      (toggleDia)="toggleDia($event)"
+      (save)="onSave()"
+      (cancel)="onCancel()"
+    />
+  }
+} @else {
+  <p class="page-loading">Carregando alunos…</p>
+}

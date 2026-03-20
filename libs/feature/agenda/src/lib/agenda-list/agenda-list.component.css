@@ -1,0 +1,46 @@
+.agenda-list__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.agenda-list__empty {
+  color: #555;
+}
+
+.agenda-list__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.agenda-list__item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.agenda-list__hora {
+  font-weight: 600;
+  min-width: 3.5rem;
+}
+
+.agenda-list__ate {
+  color: #666;
+}
+
+.agenda-list__nome {
+  flex: 1 1 8rem;
+}
+
+.agenda-list__obs {
+  flex: 1 1 100%;
+  font-size: 0.875rem;
+  color: #666;
+}

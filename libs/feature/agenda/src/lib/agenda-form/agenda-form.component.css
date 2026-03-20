@@ -1,0 +1,67 @@
+.agenda-form__field {
+  margin-bottom: 1rem;
+}
+
+.agenda-form__field label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+.agenda-form__field select {
+  width: 100%;
+  max-width: 24rem;
+  padding: 0.35rem 0.5rem;
+}
+
+.agenda-form__err {
+  display: block;
+  color: #b00020;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.agenda-form__dias {
+  margin: 0 0 1rem;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.agenda-form__dias legend {
+  padding: 0 0.25rem;
+  font-weight: 500;
+}
+
+.agenda-form__dias-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.agenda-form__dia-btn {
+  padding: 0.35rem 0.55rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.agenda-form__dia-btn--on {
+  border-color: #333;
+  background: #e8f4ff;
+  font-weight: 600;
+}
+
+.agenda-form__dia-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.agenda-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}

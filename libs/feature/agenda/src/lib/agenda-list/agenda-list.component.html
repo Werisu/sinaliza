@@ -1,0 +1,28 @@
+<div class="agenda-list">
+  <div class="agenda-list__header">
+    <h2>Agenda — {{ tituloDia }}</h2>
+    <librasflow-button (clicked)="novoClicked.emit()">Novo horário</librasflow-button>
+  </div>
+
+  @if (itens.length === 0) {
+    <p class="agenda-list__empty">Nenhuma aula neste dia.</p>
+  } @else {
+    <ul class="agenda-list__items">
+      @for (item of itens; track item.id) {
+        <li class="agenda-list__item">
+          <span class="agenda-list__hora">{{ item.horaInicio }}</span>
+          @if (item.horaFim) {
+            <span class="agenda-list__ate">– {{ item.horaFim }}</span>
+          }
+          <span class="agenda-list__nome">{{ item.alunoNome }}</span>
+          @if (item.observacoes) {
+            <span class="agenda-list__obs">{{ item.observacoes }}</span>
+          }
+          <librasflow-button variant="danger" (clicked)="excluirClicked.emit(item.id)">
+            Excluir
+          </librasflow-button>
+        </li>
+      }
+    </ul>
+  }
+</div>

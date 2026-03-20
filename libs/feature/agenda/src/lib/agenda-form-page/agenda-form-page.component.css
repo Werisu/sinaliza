@@ -1,0 +1,12 @@
+.agenda-form-page__title {
+  margin-top: 0;
+}
+
+.page-error {
+  color: #b00020;
+}
+
+.page-loading,
+.page-hint {
+  color: #555;
+}
