@@ -1,0 +1,16 @@
+@if (vm$ | async; as vm) {
+  @if (vm.error) {
+    <p class="page-error" role="alert">{{ vm.error }}</p>
+    <button type="button" (click)="carregarAlunos()">Tentar novamente</button>
+  } @else if (vm.loading) {
+    <p class="page-loading">Carregando…</p>
+  } @else {
+    <librasflow-alunos-list
+      [alunos]="vm.alunos"
+      (novoClicked)="onNovo()"
+      (editarClicked)="onEditar($event)"
+    ></librasflow-alunos-list>
+  }
+} @else {
+  <p class="page-loading">Carregando…</p>
+}

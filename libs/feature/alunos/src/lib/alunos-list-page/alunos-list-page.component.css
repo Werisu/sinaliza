@@ -1,0 +1,12 @@
+:host {
+  display: block;
+}
+
+.page-error {
+  color: #c00;
+  margin-bottom: 0.5rem;
+}
+
+.page-loading {
+  color: #666;
+}

@@ -1,0 +1,14 @@
+.alunos-form-page h2 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.25rem;
+}
+
+.page-error {
+  color: #c00;
+  margin-bottom: 0.75rem;
+}
+
+.page-loading {
+  color: #666;
+  margin-top: 0.5rem;
+}

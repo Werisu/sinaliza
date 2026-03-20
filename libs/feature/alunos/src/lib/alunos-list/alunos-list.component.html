@@ -1,0 +1,27 @@
+<div class="alunos-list">
+  <div class="alunos-list__header">
+    <h2>Alunos</h2>
+    <librasflow-button (clicked)="novoClicked.emit()">
+      Novo aluno
+    </librasflow-button>
+  </div>
+
+  @if (alunos.length === 0) {
+    <p class="alunos-list__empty">Nenhum aluno cadastrado.</p>
+  } @else {
+    <ul class="alunos-list__items">
+      @for (aluno of alunos; track aluno.id) {
+        <li class="alunos-list__item">
+          <span class="alunos-list__nome">{{ aluno.nome }}</span>
+          <span class="alunos-list__meta">{{ aluno.tipoAula }} · {{ aluno.nivel }}</span>
+          <librasflow-button
+            variant="secondary"
+            (clicked)="editarClicked.emit(aluno.id)"
+          >
+            Editar
+          </librasflow-button>
+        </li>
+      }
+    </ul>
+  }
+</div>

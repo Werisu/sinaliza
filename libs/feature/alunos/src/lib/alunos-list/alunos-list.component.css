@@ -1,0 +1,41 @@
+.alunos-list__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.alunos-list__header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.alunos-list__empty {
+  color: #666;
+}
+
+.alunos-list__items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.alunos-list__item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  border: 1px solid #eee;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.alunos-list__nome {
+  flex: 1;
+  font-weight: 500;
+}
+
+.alunos-list__meta {
+  font-size: 0.875rem;
+  color: #666;
+}

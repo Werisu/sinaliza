@@ -1,0 +1,11 @@
+<div class="form-field">
+  @if (label) {
+    <label class="form-field__label">{{ label }}</label>
+  }
+  <ng-content></ng-content>
+  @if (control?.invalid && control?.touched && control?.errors) {
+    <span class="form-field__error">
+      {{ errorMessage || getErrorMessage() }}
+    </span>
+  }
+</div>

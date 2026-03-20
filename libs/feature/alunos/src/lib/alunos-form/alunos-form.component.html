@@ -1,0 +1,42 @@
+<form [formGroup]="form" (ngSubmit)="save.emit()">
+  <librasflow-form-field label="Nome" [control]="form.get('nome')">
+    <input type="text" formControlName="nome" />
+  </librasflow-form-field>
+
+  <librasflow-form-field label="Telefone" [control]="form.get('telefone')">
+    <input type="tel" formControlName="telefone" />
+  </librasflow-form-field>
+
+  <librasflow-form-field label="Tipo de aula" [control]="form.get('tipoAula')">
+    <select formControlName="tipoAula">
+      <option value="">Selecione</option>
+      @for (tipo of tiposAula; track tipo) {
+        <option [value]="tipo">{{ tipo }}</option>
+      }
+    </select>
+  </librasflow-form-field>
+
+  <librasflow-form-field label="Nível" [control]="form.get('nivel')">
+    <select formControlName="nivel">
+      <option value="">Selecione</option>
+      @for (nivel of niveis; track nivel) {
+        <option [value]="nivel">{{ nivel }}</option>
+      }
+    </select>
+  </librasflow-form-field>
+
+  <librasflow-form-field label="Observações" [control]="form.get('observacoes')">
+    <textarea formControlName="observacoes" rows="3"></textarea>
+  </librasflow-form-field>
+
+  <div class="alunos-form__actions">
+    <librasflow-button type="submit">Salvar</librasflow-button>
+    <librasflow-button
+      type="button"
+      variant="secondary"
+      (clicked)="cancel.emit()"
+    >
+      Cancelar
+    </librasflow-button>
+  </div>
+</form>

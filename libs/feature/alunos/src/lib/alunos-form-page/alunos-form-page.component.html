@@ -1,0 +1,22 @@
+<div class="alunos-form-page">
+  <h2>{{ isEdit ? 'Editar aluno' : 'Novo aluno' }}</h2>
+
+  @if (loadError) {
+    <p class="page-error" role="alert">{{ loadError }}</p>
+  } @else if (loading) {
+    <p class="page-loading">Carregando…</p>
+  } @else {
+    @if (saveError) {
+      <p class="page-error" role="alert">{{ saveError }}</p>
+    }
+    <librasflow-alunos-form
+      [form]="form"
+      [isEdit]="isEdit"
+      (save)="onSave()"
+      (cancel)="onCancel()"
+    ></librasflow-alunos-form>
+    @if (saving) {
+      <p class="page-loading">Salvando…</p>
+    }
+  }
+</div>
