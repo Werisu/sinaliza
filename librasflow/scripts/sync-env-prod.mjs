@@ -9,15 +9,41 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const outFile = path.join(__dirname, '..', 'src', 'environments', 'environment.prod.ts');
 
-const url = (process.env.SUPABASE_URL ?? '').trim();
-const anonKey = (process.env.SUPABASE_ANON_KEY ?? '').trim();
+function firstEnv(...keys) {
+  for (const key of keys) {
+    const v = process.env[key];
+    if (v != null && String(v).trim() !== '') return String(v).trim();
+  }
+  return '';
+}
+
+/** Nomes aceitos (evita copiar template Next/Vite com prefixo errado). */
+const url = firstEnv(
+  'SUPABASE_URL',
+  'NEXT_PUBLIC_SUPABASE_URL',
+  'VITE_SUPABASE_URL'
+);
+const anonKey = firstEnv(
+  'SUPABASE_ANON_KEY',
+  'NEXT_PUBLIC_SUPABASE_ANON_KEY',
+  'VITE_SUPABASE_ANON_KEY'
+);
 const onVercel = process.env.VERCEL === '1';
 
 if (!url || !anonKey) {
   if (onVercel) {
+    const missing = [
+      !url && 'SUPABASE_URL (ou NEXT_PUBLIC_SUPABASE_URL / VITE_SUPABASE_URL)',
+      !anonKey && 'SUPABASE_ANON_KEY (ou NEXT_PUBLIC_* / VITE_* equivalente)',
+    ].filter(Boolean);
+    console.error('Vercel: faltam variáveis para o build:', missing.join(', '));
     console.error(
-      'Vercel: defina SUPABASE_URL e SUPABASE_ANON_KEY em Settings → Environment Variables (Production).'
+      '1) Project → Settings → Environment Variables → adicione para ambiente Production.'
     );
+    console.error(
+      '2) Não marque como "Sensitive" — no Vercel isso impede o uso no passo de build.'
+    );
+    console.error('3) Salve e faça Redeploy (Deployments → … → Redeploy).');
     process.exit(1);
   }
   console.warn(
