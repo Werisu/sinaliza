@@ -21,7 +21,7 @@
           }
         ],
         "styles": [
-          "librasflow/src/tailwind.css",
+          "librasflow/tailwind.css",
           "librasflow/src/styles.scss"
         ]
       },
